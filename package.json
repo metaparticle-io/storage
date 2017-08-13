@@ -1,0 +1,37 @@
+{
+  "name": "@metaparticle/storage",
+  "version": "0.1.0",
+  "description": "Scoped storage library",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metaparticle-io/storage.git"
+  },
+  "files": [
+    "*.js"
+  ],
+  "main": "metaparticle-storage.js",
+  "scripts": {
+    "clean": "rm -Rf node_modules/ dist/",
+    "test": "mocha test/*_test.js"
+  },
+  "author": "Brendan Burns",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "harmony-proxy": "^1.0.1",
+    "loglevel": "^1.4.1",
+    "node-redis-client": "0.0.10",
+    "q": "^1.5.0"
+  },
+  "devDependencies": {
+    "unit.js": "^2.0.0",
+    "mocha": "^3.4.2"
+  },
+  "bugs": {
+    "url": "https://github.com/metaparticle-io/storage/issues"
+  },
+  "homepage": "https://github.com/metaparticle-io/storage",
+  "keywords": [
+    "storage",
+    "persistence"
+  ]
+}

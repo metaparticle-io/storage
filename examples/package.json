@@ -1,0 +1,20 @@
+{
+  "name": "@metaparticle/storage-examples",
+  "version": "0.1.0",
+  "description": "Scoped storage library examples",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metaparticle-io/storage.git"
+  },
+  "files": [
+    "*.js"
+  ],
+  "main": "example.js",
+  "scripts": {
+    "clean": "rm -Rf node_modules/"
+  },
+  "author": "Brendan Burns",
+  "license": "Apache-2.0",
+  "dependencies": {
+  }
+}
