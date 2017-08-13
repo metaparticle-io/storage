@@ -1,7 +1,53 @@
-# Metaparticle storage
-Distributed, concurrent, implicit persistence for [Node.js](https://nodejs.org)
+# Metaparticle/storage
+Easy implicit, concurrent persistence for [Node.js](https://nodejs.org)
 
-## Goals
+## But what does it do for me?
+
+Metaparticle/storage lets you treat persistent (e.g. MongoDB, Redis or MySQL) storage the same as you treat local storage. 
+Furthermore it manages concurrent storage access, it automatically detects conflicts, rolls back data transformations and 
+resolves the conflicts.
+
+## Hrm, I'm not sure what that really means, can you say it in a different way?
+Metaparticle/storage makes distributed storage easy.
+
+## Great, but how does it work?
+Metaparticle/storage works by defining chunks of data called _scopes_. You define a scope by giving Metaparticle/storage a
+scope _name_. Metaparticle/storage gives you back that scope and ensures that all reads/writes within that scope occur
+in a single transaction. This means that you are guaranteed that within a scope, data consistency is guaranteed.
+
+## Sounds fancy, can I get an example?
+To understand how this works, consider the task of multi-threaded increment of an integer `i`. We have all seen the data race
+that can occur:
+
+   1 Thread-1 reads `i`, `i == 0`
+   2 Thread-2 reads `i`, `i == 0`
+   3 Thread-1 writes `i + 1`, `i == 1`
+   4 Thread-2 writes `i + 1`, `i == 1`
+
+You can see that despite two increment operations, the value of the variable only increases by one.
+
+To solve this via Metaparticle/storage, you write:
+
+```js
+metaparticle.scoped('global', (data) => {
+   data.i++;
+   ...
+}
+```
+
+Metaparticle ensures both that the local modifications to the value `i` are preserved in persistent storage, as well as that
+the changes are only preserved if there have been no other concurrent modifications to the data. If Metaparticle detects other
+data modifications, it automatically rolls back any of its current data modifications and re-runs the function.
+
+## Give me more!
+There are some additional walkthroughs:
+   * Basic Example
+   * Basic Web Server
+   * User-specific scopes
+
+## Details
+
+### Goals
 In distributed systems, persistent state management is often one of the largest design challenges.
 The goals of Metaparticle storage are to make this easy. Metaparticle storage achieves this by moving from _explicit_ storage
 to _implicit_ storage, and by managing concurrent operations for the user.
