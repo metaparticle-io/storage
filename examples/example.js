@@ -9,4 +9,5 @@ mp.scoped('global', function(scope) {
     return scope.calls;
 }).then(function(calls) {
     console.log(calls);
+    mp.shutdown();
 });

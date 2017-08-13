@@ -3,13 +3,20 @@
     var q = require('q');
     var storageImpls = {
         "file": require('./metaparticle-file-storage.js'),
-        "redis": require('./metaparticle-redis-storage')
+        "redis": require('./metaparticle-redis-storage'),
+        "mysql": require('./metaparticle-mysql-storage.js')
     }
 
     module.exports.setStorage = function(name, config) {
         storage = storageImpls[name];
         if (storage != null) {
             storage.configure(config);
+        }
+    }
+
+    module.exports.shutdown = () => {
+        if (storage && storage.shutdown) {
+            storage.shutdown();
         }
     }
 
