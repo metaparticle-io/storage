@@ -88,7 +88,7 @@ Examples of side-effects include:
 Metaparticle/storage does not currently detect these side-effects. This means that it is up to you to police your usage and ensure that the code within a scope is side-effect free.
 
 ## Deep Dive
-There is a much deeper dive [here](...,), it contains a deeper description of the problems Metaparticle/storage is trying to solve and examples of it in operation.
+There is a much deeper dive [here](details.md), it contains a deeper description of the problems Metaparticle/storage is trying to solve and examples of it in operation.
 
 ## Bugs
 There are probably some
