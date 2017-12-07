@@ -3,8 +3,8 @@ Easy implicit, concurrent persistence for [Node.js](https://nodejs.org)
 
 ## But what does it do for me?
 
-Metaparticle/storage lets you treat persistent (e.g. MongoDB, Redis or MySQL) storage the same as you treat local storage. 
-Furthermore it manages concurrent storage access, it automatically detects conflicts, rolls back data transformations and 
+Metaparticle/storage lets you treat persistent (e.g. MongoDB, Redis or MySQL) storage the same as you treat local storage.
+Furthermore it manages concurrent storage access, it automatically detects conflicts, rolls back data transformations and
 resolves the conflicts.
 
 ## Hrm, I'm not sure what that really means, can you say it in a different way?
@@ -19,10 +19,10 @@ in a single transaction. This means that you are guaranteed that within a scope,
 To understand how this works, consider the task of multi-threaded increment of an integer `i`. We have all seen the data race
 that can occur:
 
-   1 Thread-1 reads `i`, `i == 0`
-   2 Thread-2 reads `i`, `i == 0`
-   3 Thread-1 writes `i + 1`, `i == 1`
-   4 Thread-2 writes `i + 1`, `i == 1`
+   1. Thread-1 reads `i`, `i == 0`
+   2. Thread-2 reads `i`, `i == 0`
+   3. Thread-1 writes `i + 1`, `i == 1`
+   4. Thread-2 writes `i + 1`, `i == 1`
 
 You can see that despite two increment operations, the value of the variable only increases by one.
 
@@ -69,7 +69,7 @@ But when we encounter a persistence layer, the storage becomes _explicit_:
 client.set("i", 0);
 ...
 var value = client.get("i");
-client.update("i", value + 1); 
+client.update("i", value + 1);
 ```
 
 The differences between the two code snippets aren't eggregious, but the later introduces a bunch of cognitive
@@ -104,5 +104,3 @@ into the persistent storage.
 Metaparticle storage makes this easy as well, since it takes care of conflict detection, rollback and resolution. The only caveat
 of this (there is no free lunch after all). Is that your function has to be side-effect free other than it's interactions with
 storage. The reason for this is that the function may be executed multiple time before it can be successfully committed.
-
-
