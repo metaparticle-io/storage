@@ -21,7 +21,7 @@ are automatically detected and persisted.
 
 ## Example
 Here is a simple web-server which increments a counter and returns the number of requests. Despite looking
-like a local variable, the counter is kept globably, and persists despite server restarts, scaling or failures.
+like a local variable, the counter is kept globally, and persists despite server restarts, scaling or failures.
 Furthermore, the read/update/write of the counter is automatically atomic, even under concurrent load the
 system maintains the correct count of requests.
 
