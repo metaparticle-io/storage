@@ -2,14 +2,17 @@
     var storage = null;
     var q = require('q');
     var storageImpls = {
-        "file": require('./metaparticle-file-storage.js'),
-        "redis": require('./metaparticle-redis-storage'),
-        "mysql": require('./metaparticle-mysql-storage.js')
+        "file": './metaparticle-file-storage.js',
+        "redis": './metaparticle-redis-storage',
+        "mysql": './metaparticle-mysql-storage.js'
     }
 
     module.exports.setStorage = function(name, config) {
-        storage = storageImpls[name];
-        if (storage != null) {
+        // Does this storage method exist?
+        const file = storageImpls[name];
+        if ('undefined' !== typeof (file)) {
+            // Yes, initialise it.
+            storage = require(file);
             storage.configure(config);
         }
     }
